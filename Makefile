@@ -6,7 +6,7 @@ build:
 	@docker build -q -t ${image} .
 
 tests:
-	@docker run $(CI,,-it) ${image} ./main
+	@docker run $({CI},,-it) ${image} ./main
 
 sh:
-	@docker run $(CI,,-it) ${image} sh
+	@docker run $({CI},,-it) ${image} sh
