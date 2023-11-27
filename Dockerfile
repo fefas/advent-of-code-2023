@@ -10,4 +10,4 @@ WORKDIR /home/aoc2023
 
 COPY ./ ./
 
-RUN g++ -o main main.cpp tests/*.cpp src/*.cpp -lgtest -lgtest_main
+RUN g++ -o main main.cpp tests/*.cpp src/*.cpp -lgtest
