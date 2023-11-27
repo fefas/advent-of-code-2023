@@ -1,0 +1,12 @@
+name: CI
+
+on: push
+concurrency: ci-on-${{ github.ref_name }}
+
+jobs:
+  tests:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v3
+      - run: make build
+      - run: make tests
