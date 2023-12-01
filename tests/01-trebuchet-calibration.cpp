@@ -35,6 +35,48 @@ namespace {
         ASSERT_EQ(142, solution->sumCalibrations(input));
     }
 
+    TEST(TrebuchetCalibration, two1nine) {
+        ASSERT_EQ(29, solution->sumCalibrations("two1nine"));
+    }
+
+    TEST(TrebuchetCalibration, eightwothree) {
+        ASSERT_EQ(83, solution->sumCalibrations("eightwothree"));
+    }
+
+    TEST(TrebuchetCalibration, abcone2threexyz) {
+        ASSERT_EQ(13, solution->sumCalibrations("abcone2threexyz"));
+    }
+
+    TEST(TrebuchetCalibration, xtwone3four) {
+        ASSERT_EQ(24, solution->sumCalibrations("xtwone3four"));
+    }
+
+    TEST(TrebuchetCalibration, 4nineeightseven2) {
+        ASSERT_EQ(42, solution->sumCalibrations("4nineeightseven2"));
+    }
+
+    TEST(TrebuchetCalibration, zoneight234) {
+        ASSERT_EQ(14, solution->sumCalibrations("zoneight234"));
+    }
+
+    TEST(TrebuchetCalibration, 7pqrstsixteen) {
+        ASSERT_EQ(76, solution->sumCalibrations("7pqrstsixteen"));
+    }
+
+    TEST(TrebuchetCalibration, allLinesAboveAgain) {
+        string input = "";
+
+        input += "two1nine\n";
+        input += "eightwothree\n";
+        input += "abcone2threexyz\n";
+        input += "xtwone3four\n";
+        input += "4nineeightseven2\n";
+        input += "zoneight234\n";
+        input += "7pqrstsixteen";
+
+        ASSERT_EQ(281, solution->sumCalibrations(input));
+    }
+
     TEST(TrebuchetCalibration, myPuzzleInput) {
         string input = "";
 
@@ -1039,7 +1081,7 @@ namespace {
         input += "rphtbkncs4nznsix\n";
         input += "6three2sixsix9eightfour";
 
-        ASSERT_EQ(55538, solution->sumCalibrations(input));
+        ASSERT_EQ(54875, solution->sumCalibrations(input));
     }
 }
 
