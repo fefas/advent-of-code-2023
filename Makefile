@@ -1,12 +1,10 @@
 MAKEFLAGS += --always-make
 
-image = aoc2023
-
-build:
-	@docker build -q -t ${image} .
+image = fefas/aoc2023
 
 tests:
-	@docker run $({CI},,-it) ${image} ./main
+	@docker build -q -t ${image} .
+	@docker run $(if ${CI},,-it) ${image}
 
 sh:
-	@docker run $({CI},,-it) ${image} sh
+	@docker run -it --entrypoint=sh ${image}
