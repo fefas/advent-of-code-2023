@@ -10,13 +10,13 @@ namespace {
     TEST(CubeCanundrum, noPossibleGameWithBlueCubesOnly) {
         vector<Game*> games = { new Game({ new NumberOfCubes(2, 0, 0) }) };
 
-        ASSERT_EQ(0, solution->findPossibleGames(new NumberOfCubes(1, 0, 0), games));
+        ASSERT_EQ(0, solution->part1(new NumberOfCubes(1, 0, 0), games));
     }
 
     TEST(CubeCanundrum, onePossibleGameWithBlueCubesOnly) {
         vector<Game*> games = { new Game({ new NumberOfCubes(1, 0, 0) }) };
 
-        ASSERT_EQ(1, solution->findPossibleGames(new NumberOfCubes(1, 0, 0), games));
+        ASSERT_EQ(1, solution->part1(new NumberOfCubes(1, 0, 0), games));
     }
 
     TEST(CubeCanundrum, twoPossibleGamesWithBlueCubes) {
@@ -26,7 +26,7 @@ namespace {
             new Game({ new NumberOfCubes(5, 0 , 0) }),
         };
 
-        ASSERT_EQ(4, solution->findPossibleGames(new NumberOfCubes(7, 0, 0), games));
+        ASSERT_EQ(4, solution->part1(new NumberOfCubes(7, 0, 0), games));
     }
 
     TEST(CubeCanundrum, threePossibleGamesWithCubesOfAllColors) {
@@ -39,7 +39,7 @@ namespace {
             new Game({ new NumberOfCubes(5, 6, 0) }),
         };
 
-        ASSERT_EQ(9, solution->findPossibleGames(new NumberOfCubes(7, 5, 10), games));
+        ASSERT_EQ(9, solution->part1(new NumberOfCubes(7, 5, 10), games));
     }
 
     TEST(CubeCanundrum, threePossibleGamesWithMultipleRoundsAndAllColors) {
@@ -50,7 +50,7 @@ namespace {
             new Game({ new NumberOfCubes(5, 2, 0), new NumberOfCubes(5, 0, 10) }),
         };
 
-        ASSERT_EQ(6, solution->findPossibleGames(new NumberOfCubes(7, 5, 10), games));
+        ASSERT_EQ(6, solution->part1(new NumberOfCubes(7, 5, 10), games));
     }
 
     TEST(CubeCanundrum, myPuzzle) {
@@ -180,6 +180,6 @@ namespace {
             games.push_back(new Game(rounds));
         }
 
-        ASSERT_EQ(2164, solution->findPossibleGames(new NumberOfCubes(14, 12, 13), games));
+        ASSERT_EQ(2164, solution->part1(new NumberOfCubes(14, 12, 13), games));
     }
 }

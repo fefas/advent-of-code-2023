@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int Solution_02::findPossibleGames(NumberOfCubes *config, vector<Game*> games)
+int Solution_02::part1(NumberOfCubes *config, vector<Game*> games)
 {
     int ans = 0;
 

@@ -44,6 +44,6 @@ class Game
 class Solution_02
 {
     public:
-    int findPossibleGames(NumberOfCubes *config, vector<Game*> games);
+    int part1(NumberOfCubes *config, vector<Game*> games);
 };
 
