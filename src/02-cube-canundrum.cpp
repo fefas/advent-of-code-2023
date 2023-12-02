@@ -14,3 +14,8 @@ int Solution_02::part1(NumberOfCubes *config, vector<Game*> games)
 
     return ans;
 };
+
+int Solution_02::part2(vector<Game*> games)
+{
+    return 0;
+};

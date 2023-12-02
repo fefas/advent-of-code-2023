@@ -45,5 +45,6 @@ class Solution_02
 {
     public:
     int part1(NumberOfCubes *config, vector<Game*> games);
+    int part2(vector<Game*> games);
 };
 

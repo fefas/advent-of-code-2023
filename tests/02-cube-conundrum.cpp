@@ -11,12 +11,14 @@ namespace {
         vector<Game*> games = { new Game({ new NumberOfCubes(2, 0, 0) }) };
 
         ASSERT_EQ(0, solution->part1(new NumberOfCubes(1, 0, 0), games));
+        ASSERT_EQ(0, solution->part2(games));
     }
 
     TEST(CubeCanundrum, onePossibleGameWithBlueCubesOnly) {
         vector<Game*> games = { new Game({ new NumberOfCubes(1, 0, 0) }) };
 
         ASSERT_EQ(1, solution->part1(new NumberOfCubes(1, 0, 0), games));
+        ASSERT_EQ(0, solution->part2(games));
     }
 
     TEST(CubeCanundrum, twoPossibleGamesWithBlueCubes) {
@@ -27,6 +29,7 @@ namespace {
         };
 
         ASSERT_EQ(4, solution->part1(new NumberOfCubes(7, 0, 0), games));
+        ASSERT_EQ(0, solution->part2(games));
     }
 
     TEST(CubeCanundrum, threePossibleGamesWithCubesOfAllColors) {
