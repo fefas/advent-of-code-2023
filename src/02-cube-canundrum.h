@@ -19,10 +19,25 @@ class NumberOfCubes
 
 class Game
 {
-    public:
+    private:
     const vector<NumberOfCubes*> rounds;
 
+    public:
     Game(vector<NumberOfCubes*> _r) : rounds(_r) {}
+
+    bool comply(NumberOfCubes *config)
+    {
+        bool comply = true;
+
+        for (auto r : rounds) {
+            if (!config->fit(r)) {
+                comply = false;
+                break;
+            }
+        }
+
+        return comply;
+    }
 };
 
 class Solution_02
