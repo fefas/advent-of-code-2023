@@ -10,6 +10,11 @@ class NumberOfCubes
     const short green;
 
     NumberOfCubes(int _b, int _r, int _g) : blue(_b), red(_r), green(_g) {}
+
+    bool fit(NumberOfCubes *that)
+    {
+        return blue >= that->blue;
+    }
 };
 
 class Solution_02
