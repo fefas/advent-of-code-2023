@@ -6,5 +6,5 @@ using namespace std;
 
 int Solution_02::findPossibleGames(NumberOfCubes *config, vector<NumberOfCubes*> rounds)
 {
-    return 0;
+    return config->blue >= rounds[0]->blue ? 1 : 0;
 };

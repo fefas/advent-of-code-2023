@@ -8,9 +8,15 @@ namespace {
     Solution_02 *solution = new Solution_02();
 
     TEST(CubeCanundrum, noPossibleGame) {
-        vector<NumberOfCubes*> games = {};
+        vector<NumberOfCubes*> games = { new NumberOfCubes(2, 0, 0) };
 
         ASSERT_EQ(0, solution->findPossibleGames(new NumberOfCubes(1, 0, 0), games));
+    }
+
+    TEST(CubeCanundrum, onePossibleGame) {
+        vector<NumberOfCubes*> games = { new NumberOfCubes(1, 0, 0) };
+
+        ASSERT_EQ(1, solution->findPossibleGames(new NumberOfCubes(1, 0, 0), games));
     }
 }
 
