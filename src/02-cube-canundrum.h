@@ -17,9 +17,17 @@ class NumberOfCubes
     }
 };
 
+class Game
+{
+    public:
+    const vector<NumberOfCubes*> rounds;
+
+    Game(vector<NumberOfCubes*> _r) : rounds(_r) {}
+};
+
 class Solution_02
 {
     public:
-    int findPossibleGames(NumberOfCubes *config, vector<NumberOfCubes*> rounds);
+    int findPossibleGames(NumberOfCubes *config, vector<Game*> games);
 };
 

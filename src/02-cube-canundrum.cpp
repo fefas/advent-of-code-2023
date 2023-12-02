@@ -4,12 +4,12 @@
 
 using namespace std;
 
-int Solution_02::findPossibleGames(NumberOfCubes *config, vector<NumberOfCubes*> rounds)
+int Solution_02::findPossibleGames(NumberOfCubes *config, vector<Game*> games)
 {
     int ans = 0;
 
-    for (int game = 0; game < rounds.size(); game++) {
-        if (config->fit(rounds[game])) ans += game + 1;
+    for (int i = 0; i < games.size(); i++) {
+        if (config->fit(games[i]->rounds[0])) ans += i + 1;
     }
 
     return ans;
