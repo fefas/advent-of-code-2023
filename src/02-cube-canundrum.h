@@ -13,7 +13,7 @@ class NumberOfCubes
 
     bool fit(NumberOfCubes *that)
     {
-        return blue >= that->blue;
+        return blue >= that->blue && red >= that->red && green >= that->green;
     }
 };
 
