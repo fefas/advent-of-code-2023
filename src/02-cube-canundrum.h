@@ -20,23 +20,24 @@ class NumberOfCubes
 class Game
 {
     private:
-    const vector<NumberOfCubes*> rounds;
+    NumberOfCubes* maxFromAllRounds;
 
     public:
-    Game(vector<NumberOfCubes*> _r) : rounds(_r) {}
+    Game(vector<NumberOfCubes*> rounds)
+    {
+        short maxB = 0, maxR = 0, maxG = 0;
+        for (auto r : rounds) {
+            maxB = max(maxB, r->blue);
+            maxR = max(maxR, r->red);
+            maxG = max(maxG, r->green);
+        }
+
+        maxFromAllRounds = new NumberOfCubes(maxB, maxR, maxG);
+    }
 
     bool comply(NumberOfCubes *config)
     {
-        bool comply = true;
-
-        for (auto r : rounds) {
-            if (!config->fit(r)) {
-                comply = false;
-                break;
-            }
-        }
-
-        return comply;
+        return config->fit(maxFromAllRounds);
     }
 };
 
