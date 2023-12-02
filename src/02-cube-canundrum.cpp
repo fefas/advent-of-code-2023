@@ -17,5 +17,11 @@ int Solution_02::part1(NumberOfCubes *config, vector<Game*> games)
 
 int Solution_02::part2(vector<Game*> games)
 {
-    return 0;
+    int ans = 0;
+
+    for (auto g : games) {
+        ans += g->powerOfNeededCubesSet();
+    }
+
+    return ans;
 };

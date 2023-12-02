@@ -43,6 +43,7 @@ namespace {
         };
 
         ASSERT_EQ(9, solution->part1(new NumberOfCubes(7, 5, 10), games));
+        ASSERT_EQ(150, solution->part2(games));
     }
 
     TEST(CubeCanundrum, threePossibleGamesWithMultipleRoundsAndAllColors) {
@@ -54,6 +55,7 @@ namespace {
         };
 
         ASSERT_EQ(6, solution->part1(new NumberOfCubes(7, 5, 10), games));
+        ASSERT_EQ(506, solution->part2(games));
     }
 
     TEST(CubeCanundrum, myPuzzle) {
@@ -184,5 +186,6 @@ namespace {
         }
 
         ASSERT_EQ(2164, solution->part1(new NumberOfCubes(14, 12, 13), games));
+        ASSERT_EQ(69929, solution->part2(games));
     }
 }

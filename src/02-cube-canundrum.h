@@ -39,6 +39,11 @@ class Game
     {
         return config->fit(maxFromAllRounds);
     }
+
+    int powerOfNeededCubesSet()
+    {
+        return maxFromAllRounds->blue * maxFromAllRounds->red * maxFromAllRounds->green;
+    }
 };
 
 class Solution_02
