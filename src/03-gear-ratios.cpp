@@ -7,11 +7,15 @@ using namespace std;
 
 int Solution_03::part1(vector<string> m)
 {
+    int ans = 0;
+
     for (int i = 0; i < m[0].size(); i++) {
-        if (m[0][i] >= '0' && m[0][i] <= '9') {
-            return m[0][i] - '0';
+        char c = m[0][i];
+
+        if (c >= '0' && c <= '9') {
+            ans = 10 * ans + (c - '0');
         }
     }
 
-    return 0;
+    return ans;
 }

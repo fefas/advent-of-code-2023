@@ -14,4 +14,8 @@ namespace {
     TEST(GearRatios, oneNumberOfOneDigit) {
         ASSERT_EQ(2, solution->part1({ ".....2*.." }));
     }
+
+    TEST(GearRatios, oneNumberOfMultipleDigit) {
+        ASSERT_EQ(1403, solution->part1({ "..#1403*.." }));
+    }
 }
