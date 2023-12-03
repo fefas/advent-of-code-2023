@@ -72,6 +72,11 @@ class Number
 
         return false;
     }
+
+    bool isEqual(Number *that)
+    {
+        return iCol == that->iCol && iRow == that->iRow;
+    }
 };
 
 class Gear
@@ -79,38 +84,44 @@ class Gear
     private:
     const vector<string> m;
     const int iRow, iCol;
+    vector<Number*> adjacents;
 
     public:
-    Gear(vector<string> _m, int _r, int _c) : m(_m), iRow(_r), iCol(_c) {}
+    Gear(vector<string> _m, int _r, int _c) : m(_m), iRow(_r), iCol(_c)
+    {
+        computeAdjacents();
+    }
 
     int ratio()
     {
-        vector<Number*> adjacents = findAdjacentNumbers();
-
-        return (adjacents.size() == 2) ? adjacents[0]->toInt() * adjacents[1]->toInt() : 0;
+        return (adjacents.size() != 2) ? 0 : adjacents[0]->toInt() * adjacents[1]->toInt();
     }
 
     private:
-    vector<Number*> findAdjacentNumbers()
+    void computeAdjacents()
     {
-        vector<Number*> adjacents = {};
-
-        if (isDigit(m[iRow][iCol-1])) adjacents.push_back(new Number(m, iRow, iCol - 1));
-        if (isDigit(m[iRow][iCol+1])) adjacents.push_back(new Number(m, iRow, iCol + 1));
+        if (isDigit(m[iRow][iCol-1])) addAdjacent(new Number(m, iRow, iCol - 1));
+        if (isDigit(m[iRow][iCol+1])) addAdjacent(new Number(m, iRow, iCol + 1));
 
         for (int i = -1; i <= 1; i++) {
             if (!isDigit(m[iRow-1][iCol+i])) continue;
-            adjacents.push_back(new Number(m, iRow - 1, iCol + i));
+            addAdjacent(new Number(m, iRow - 1, iCol + i));
             i++;
         }
 
         for (int i = -1; i <= 1; i++) {
             if (!isDigit(m[iRow+1][iCol+i])) continue;
-            adjacents.push_back(new Number(m, iRow + 1, iCol + i));
+            addAdjacent(new Number(m, iRow + 1, iCol + i));
             i++;
         }
+    }
 
-        return adjacents;
+    void addAdjacent(Number *n)
+    {
+        for (auto a : adjacents)
+            if (a->isEqual(n)) return;
+
+        adjacents.push_back(n);
     }
 };
 
@@ -137,7 +148,7 @@ int Solution_03::part1(vector<string> m)
 
 int Solution_03::part2(vector<string> m)
 {
-    int ans = 0;
+    long long ans = 0;
 
     m = boxInDots(m);
 
