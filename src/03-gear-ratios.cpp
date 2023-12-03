@@ -20,6 +20,15 @@ static int isGear(char c)
     return c == '*';
 }
 
+static vector<string> boxInDots(vector<string> m)
+{
+    vector<string> boxed = { string(m[0].size() + 2, '.') };
+    for (int row = 0; row < m.size(); row++) boxed.push_back('.' + m[row] + '.');
+    boxed.push_back({ string(m[0].size() + 2, '.') });
+
+    return boxed;
+}
+
 class Number
 {
     public:
@@ -68,11 +77,7 @@ int Solution_03::part1(vector<string> m)
     int ans = 0;
     string currentNumber = "";
 
-    vector<string> boxed = { string(m[0].size() + 2, '.') };
-    for (int row = 0; row < m.size(); row++) {
-        boxed.push_back('.' + m[row] + '.');
-    }
-    boxed.push_back({ string(m[0].size() + 2, '.') });
+    m = boxInDots(m);
 
     for (int row = 1; row < boxed.size() - 1; row++) {
         for (int col = 1; col < boxed[row].size() - 1; col++) {
