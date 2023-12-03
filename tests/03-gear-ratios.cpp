@@ -10,4 +10,8 @@ namespace {
     TEST(GearRatios, noNumber) {
         ASSERT_EQ(0, solution->part1({ "......*.." }));
     }
+
+    TEST(GearRatios, oneNumberOfOneDigit) {
+        ASSERT_EQ(2, solution->part1({ ".....2*.." }));
+    }
 }
