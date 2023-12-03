@@ -30,4 +30,14 @@ namespace {
     TEST(GearRatios, twoAdjacentNumbers) {
         ASSERT_EQ(1405, solution->part1({ "..#1403..2*." }));
     }
+
+    TEST(GearRatios, adjacentNumbersInMultipleRows) {
+        ASSERT_EQ(1455, solution->part1({
+            ".87....*.2*.",
+            "...1403.....",
+            "..44......3.",
+            "...*....5.@.",
+            "....3.......",
+        }));
+    }
 }
