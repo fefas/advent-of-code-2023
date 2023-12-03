@@ -87,5 +87,11 @@ int Solution_03::part2(vector<string> m)
 {
     int ans = 0;
 
+    for (int col = 0; col < m[0].size(); col++) {
+        if (m[0][col] == '*' && isDigit(m[0][col-1]) && isDigit(m[0][col+1])) {
+            return (m[0][col-1] - '0') * (m[0][col+1] - '0');
+        }
+    }
+
     return ans;
 }

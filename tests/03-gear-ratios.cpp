@@ -33,7 +33,8 @@ namespace {
     }
 
     TEST(GearRatios, twoAdjacentNumbers) {
-        ASSERT_EQ(1405, solution->part1({ "..#1403..2*." }));
+        ASSERT_EQ(1407, solution->part1({ "..#1403..2*2." }));
+        ASSERT_EQ(4, solution->part2({ "..#1403..2*2." }));
     }
 
     TEST(GearRatios, adjacentNumbersInMultipleRows) {
