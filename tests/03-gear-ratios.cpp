@@ -37,6 +37,11 @@ namespace {
         ASSERT_EQ(4, solution->part2({ "..#1403..2*2." }));
     }
 
+    TEST(GearRatios, twoAdjacentNumbersBla) {
+        ASSERT_EQ(1427, solution->part1({ "..#1403.22*2." }));
+        ASSERT_EQ(44, solution->part2({ "..#1403.22*2." }));
+    }
+
     TEST(GearRatios, adjacentNumbersInMultipleRows) {
         ASSERT_EQ(1455, solution->part1({
             ".87....*.2*.",
