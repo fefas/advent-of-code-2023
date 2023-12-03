@@ -9,22 +9,27 @@ namespace {
 
     TEST(GearRatios, noNumber) {
         ASSERT_EQ(0, solution->part1({ "......*.." }));
+        ASSERT_EQ(0, solution->part2({ "......*.." }));
     }
 
     TEST(GearRatios, oneAdjacentNumberOfOneDigit) {
         ASSERT_EQ(2, solution->part1({ ".....2*.." }));
+        ASSERT_EQ(0, solution->part2({ ".....2*.." }));
     }
 
     TEST(GearRatios, oneAdjacentNumberOfMultipleDigit) {
         ASSERT_EQ(1403, solution->part1({ "...1403*.." }));
+        ASSERT_EQ(0, solution->part2({ "...1403*.." }));
     }
 
     TEST(GearRatios, twoNumbersButOnlyOneIsAdjacentFromBehing) {
         ASSERT_EQ(1403, solution->part1({ "...1403*.2.." }));
+        ASSERT_EQ(0, solution->part2({ "...1403*.2.." }));
     }
 
     TEST(GearRatios, twoNumbersButOnlyOneIsAdjacentFromTheFront) {
         ASSERT_EQ(1403, solution->part1({ "..#1403..2.." }));
+        ASSERT_EQ(0, solution->part2({ "..#1403..2.." }));
     }
 
     TEST(GearRatios, twoAdjacentNumbers) {

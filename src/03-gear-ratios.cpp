@@ -82,3 +82,10 @@ int Solution_03::part1(vector<string> m)
 
     return ans;
 }
+
+int Solution_03::part2(vector<string> m)
+{
+    int ans = 0;
+
+    return ans;
+}
