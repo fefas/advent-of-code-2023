@@ -5,47 +5,78 @@
 
 using namespace std;
 
+static int isDigit(char c)
+{
+    return '0' <= c && c <= '9';
+}
+
+static int isSymbol(char c)
+{
+    return c != '.' && !isDigit(c);
+}
+
+class Number
+{
+    public:
+    string val;
+    const vector<string> m;
+    const int iRow, iCol;
+
+    public:
+    Number(vector<string> _m, int _r, int _c) : m(_m), iRow(_r), iCol(_c)
+    {
+        for (int i = iCol; isDigit(m[iRow][i]); i++) val += m[iRow][i];
+    }
+
+    int length()
+    {
+        return val.size();
+    }
+
+    int toInt()
+    {
+        return stoi(val);
+    }
+
+    bool isAdjacent()
+    {
+        int lLimit = iCol - 1;
+        int rLimit = iCol + length();
+
+        if (isSymbol(m[iRow][lLimit])) return true;
+        if (isSymbol(m[iRow][rLimit])) return true;
+
+        if (iRow - 1 >= 0)
+            for (int j = lLimit; j <= rLimit; j++)
+                if (isSymbol(m[iRow-1][j])) return true;
+
+        if (iRow + 1 < m.size())
+            for (int j = lLimit; j <= rLimit; j++)
+                if (isSymbol(m[iRow+1][j])) return true;
+
+        return false;
+    }
+};
+
 int Solution_03::part1(vector<string> m)
 {
     int ans = 0;
     string currentNumber = "";
 
+    vector<string> boxed = { string(m[0].size() + 2, '.') };
     for (int row = 0; row < m.size(); row++) {
-        for (int i = 0; i < m[0].size(); i++) {
-            char c = m[row][i];
+        boxed.push_back('.' + m[row] + '.');
+    }
+    boxed.push_back({ string(m[0].size() + 2, '.') });
 
-            if (c >= '0' && c <= '9') {
-                currentNumber += c;
-            } else if (currentNumber != "") {
-                bool isAdjacent = false;
-                int rLimit = i;
-                int lLimit = i - currentNumber.size() - 1;
+    for (int row = 1; row < boxed.size() - 1; row++) {
+        for (int col = 1; col < boxed[row].size() - 1; col++) {
+            if (!isDigit(boxed[row][col])) continue;
 
-                if (m[row][rLimit] != '.' || m[row][lLimit] != '.') isAdjacent = true;
+            Number *n = new Number(boxed, row, col);
+            col += n->length() - 1;
 
-                if (!isAdjacent && row > 0) {
-                    string prevRow = m[row-1];
-                    for (int j = rLimit; j >= lLimit && j >= 0; j--) {
-                        if (prevRow[j] != '.' && (prevRow[j] < '0' || prevRow[j] > '9')) {
-                            isAdjacent = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (!isAdjacent && row + 1 < m.size()) {
-                    string nextRow = m[row+1];
-                    for (int j = rLimit; j >= lLimit && j >= 0; j--) {
-                        if (nextRow[j] != '.' && (nextRow[j] < '0' || nextRow[j] > '9')) {
-                            isAdjacent = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (isAdjacent) ans += stoi(currentNumber);
-                currentNumber = "";
-            }
+            if (n->isAdjacent()) ans += n->toInt();
         }
     }
 
