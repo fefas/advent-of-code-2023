@@ -85,12 +85,32 @@ class Gear
 
     int ratio()
     {
-        Number *n1 = NULL, *n2 = NULL;
+        vector<Number*> adjacents = findAdjacentNumbers();
 
-        if (isDigit(m[iRow][iCol-1])) n1 = new Number(m, iRow, iCol - 1);
-        if (isDigit(m[iRow][iCol+1])) n2 = new Number(m, iRow, iCol + 1);
+        return (adjacents.size() == 2) ? adjacents[0]->toInt() * adjacents[1]->toInt() : 0;
+    }
 
-        return n1 == NULL || n2 == NULL ? 0 : n1->toInt() * n2->toInt();
+    private:
+    vector<Number*> findAdjacentNumbers()
+    {
+        vector<Number*> adjacents = {};
+
+        if (isDigit(m[iRow][iCol-1])) adjacents.push_back(new Number(m, iRow, iCol - 1));
+        if (isDigit(m[iRow][iCol+1])) adjacents.push_back(new Number(m, iRow, iCol + 1));
+
+        for (int i = -1; i <= 1; i++) {
+            if (!isDigit(m[iRow-1][iCol+i])) continue;
+            adjacents.push_back(new Number(m, iRow - 1, iCol + i));
+            i++;
+        }
+
+        for (int i = -1; i <= 1; i++) {
+            if (!isDigit(m[iRow+1][iCol+i])) continue;
+            adjacents.push_back(new Number(m, iRow + 1, iCol + i));
+            i++;
+        }
+
+        return adjacents;
     }
 };
 
@@ -121,12 +141,13 @@ int Solution_03::part2(vector<string> m)
 
     m = boxInDots(m);
 
-    for (int col = 1; col < m[1].size() - 1; col++) {
-        if (!isGear(m[1][col])) continue;
+    for (int row = 1; row < m.size() - 1; row++)
+        for (int col = 1; col < m[1].size() - 1; col++) {
+            if (!isGear(m[row][col])) continue;
 
-        Gear *g = new Gear(m, 1, col);
-        ans += g->ratio();
-    }
+            Gear *g = new Gear(m, row, col);
+            ans += g->ratio();
+        }
 
     return ans;
 }
