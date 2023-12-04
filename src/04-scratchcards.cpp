@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cmath>
+#include <map>
 #include <vector>
 
 using namespace std;
@@ -17,8 +18,7 @@ class Card
     {
         vector<Card*> cards;
 
-        for (auto i : input)
-            cards.push_back(new Card(i));
+        for (int i = 0; i < input.size(); i++) cards.push_back(new Card(input[i]));
 
         return cards;
     }
@@ -50,16 +50,37 @@ class Card
 
         return count;
     }
+
+    int countPoints()
+    {
+        int nMatches = countMatches();
+
+        return nMatches ? pow(2, nMatches - 1) : 0;
+    }
 };
 
 static int countPoints(vector<Card*> cards)
 {
     int ans = 0;
 
-    for (auto c : cards) {
-        int count = c->countMatches();
-        ans += count ? pow(2, count - 1) : 0;
+    for (auto c : cards) ans += c->countPoints();
+
+    return ans;
+};
+
+static int countCopies(vector<Card*> cards)
+{
+    map<int, int> occurences;
+
+    for (int i = 0; i < cards.size(); i++) {
+        int nOccurences = ++occurences[i];
+        int nMatches = cards[i]->countMatches();
+
+        for (int j = 1; j <= nMatches; j++) occurences[i+j] += nOccurences;
     }
+
+    int ans = 0;
+    for (int i = 0; i < cards.size(); i++) ans += occurences[i];
 
     return ans;
 };
@@ -67,4 +88,9 @@ static int countPoints(vector<Card*> cards)
 int Solution_04::part1(vector<vector<vector<int>>> input)
 {
     return countPoints(Card::processInput(input));
+}
+
+int Solution_04::part2(vector<vector<vector<int>>> input)
+{
+    return countCopies(Card::processInput(input));
 }
