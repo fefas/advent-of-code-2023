@@ -42,13 +42,9 @@ class Card
     }
 };
 
-int Solution_04::part1(vector<vector<vector<int>>> input)
+static int countPoints(vector<Card*> cards)
 {
-    vector<Card*> cards;
     int ans = 0;
-
-    for (auto i : input)
-        cards.push_back(new Card(i));
 
     for (auto c : cards) {
         int count = c->countMatches();
@@ -56,4 +52,14 @@ int Solution_04::part1(vector<vector<vector<int>>> input)
     }
 
     return ans;
+};
+
+int Solution_04::part1(vector<vector<vector<int>>> input)
+{
+    vector<Card*> cards;
+
+    for (auto i : input)
+        cards.push_back(new Card(i));
+
+    return countPoints(cards);
 }
