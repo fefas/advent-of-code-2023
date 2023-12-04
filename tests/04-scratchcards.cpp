@@ -19,4 +19,12 @@ namespace {
     TEST(Scratchcards, oneSortedCardAndTwoMatchingNumbers) {
         ASSERT_EQ(2, solution->part1({ 2, 3, 5 }, { 3, 5 }));
     }
+
+    TEST(Scratchcards, oneSortedCardAndThreeMatchingNumbers) {
+        ASSERT_EQ(4, solution->part1({ 2, 3, 5, 7, 8 }, { 3, 5, 7 }));
+    }
+
+    TEST(Scratchcards, oneSortedCardAndFiveMatchingNumbers) {
+        ASSERT_EQ(16, solution->part1({ 1, 2, 3, 5, 7, 8, 11, 13 }, { 1, 3, 5, 7, 11 }));
+    }
 }
