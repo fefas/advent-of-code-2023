@@ -5,5 +5,5 @@ using namespace std;
 class Solution_04
 {
     public:
-    int part1(vector<int> winningNumbers, vector<int> gottenNumbers);
+    int part1(vector<vector<vector<int>>> cards);
 };

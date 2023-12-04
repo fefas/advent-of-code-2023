@@ -6,8 +6,9 @@ using namespace std;
 
 #include "04-scratchcards.h"
 
-int Solution_04::part1(vector<int> winningNumbers, vector<int> gottenNumbers)
+int Solution_04::part1(vector<vector<vector<int>>> cards)
 {
+    vector<int> winningNumbers = cards[0][0], gottenNumbers = cards[0][1];
     int ans = 0;
 
     sort(winningNumbers.begin(), winningNumbers.end());
