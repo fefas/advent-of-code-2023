@@ -11,4 +11,8 @@ namespace {
     TEST(Scratchcards, oneCardsAndNoMatching) {
         ASSERT_EQ(0, solution->part1({ 2, 4, 5 }, { 3 }));
     }
+
+    TEST(Scratchcards, oneCardsAndOneMatching) {
+        ASSERT_EQ(1, solution->part1({ 2, 3, 5 }, { 3 }));
+    }
 }
