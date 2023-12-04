@@ -8,24 +8,29 @@ using namespace std;
 
 int Solution_04::part1(vector<vector<vector<int>>> cards)
 {
-    vector<int> winningNumbers = cards[0][0], gottenNumbers = cards[0][1];
+    vector<int> winningNumbers, gottenNumbers;
     int ans = 0;
 
-    sort(winningNumbers.begin(), winningNumbers.end());
-    sort(gottenNumbers.begin(), gottenNumbers.end());
+    for (auto c : cards) {
+        winningNumbers = c[0];
+        gottenNumbers = c[1];
 
-    int i = 0, j = 0, count = 0;
-    while (i < gottenNumbers.size() && j < winningNumbers.size()) {
-        if (gottenNumbers[i] > winningNumbers[j]) j++;
-        else if (gottenNumbers[i] < winningNumbers[j]) i++;
-        else {
-            count++;
-            j++;
-            i++;
+        sort(winningNumbers.begin(), winningNumbers.end());
+        sort(gottenNumbers.begin(), gottenNumbers.end());
+
+        int i = 0, j = 0, count = 0;
+        while (i < gottenNumbers.size() && j < winningNumbers.size()) {
+            if (gottenNumbers[i] > winningNumbers[j]) j++;
+            else if (gottenNumbers[i] < winningNumbers[j]) i++;
+            else {
+                count++;
+                j++;
+                i++;
+            }
         }
-    }
 
-    ans += count ? pow(2, count - 1) : 0;
+        ans += count ? pow(2, count - 1) : 0;
+    }
 
     return ans;
 }

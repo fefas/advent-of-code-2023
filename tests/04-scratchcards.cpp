@@ -43,4 +43,11 @@ namespace {
             { { 7, 11, 1, 5, 2, 8, 13, 3 }, { 3, 1, 7, 5, 11 } },
         }));
     }
+
+    TEST(Scratchcards, twoUnsortedCardWithMultipleMatchings) {
+        ASSERT_EQ(18, solution->part1({
+            { { 7, 11, 1, 5, 2, 8, 13, 3 }, { 3, 1, 7, 5, 11 } },
+            { { 7, 3, 2, 8, 5 }, { 3, 8 } },
+        }));
+    }
 }
