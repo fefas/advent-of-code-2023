@@ -8,9 +8,15 @@ int Solution_04::part1(vector<int> winningNumbers, vector<int> gottenNumbers)
 {
     int ans = 0;
 
-    for (int i = 0; i < gottenNumbers.size(); i++) {
-        for (int j = 0; j < winningNumbers.size(); j++)
-            if (gottenNumbers[i] == winningNumbers[j]) ans++;
+    int i = 0, j = 0;
+    while (i < gottenNumbers.size() && j < winningNumbers.size()) {
+        if (gottenNumbers[i] > winningNumbers[j]) j++;
+        else if (gottenNumbers[i] < winningNumbers[j]) i++;
+        else {
+            ans++;
+            j++;
+            i++;
+        }
     }
 
     return ans;
