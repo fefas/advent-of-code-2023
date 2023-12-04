@@ -27,4 +27,8 @@ namespace {
     TEST(Scratchcards, oneSortedCardAndFiveMatchingNumbers) {
         ASSERT_EQ(16, solution->part1({ 1, 2, 3, 5, 7, 8, 11, 13 }, { 1, 3, 5, 7, 11 }));
     }
+
+    TEST(Scratchcards, oneUnsortedCardAndFiveMatchingNumbers) {
+        ASSERT_EQ(16, solution->part1({ 7, 11, 1, 5, 2, 8, 13, 3 }, { 3, 1, 7, 5, 11 }));
+    }
 }

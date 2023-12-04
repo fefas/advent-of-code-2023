@@ -1,5 +1,6 @@
-#include <vector>
+#include <algorithm>
 #include <cmath>
+#include <vector>
 
 using namespace std;
 
@@ -8,6 +9,9 @@ using namespace std;
 int Solution_04::part1(vector<int> winningNumbers, vector<int> gottenNumbers)
 {
     int ans = 0;
+
+    sort(winningNumbers.begin(), winningNumbers.end());
+    sort(gottenNumbers.begin(), gottenNumbers.end());
 
     int i = 0, j = 0, count = 0;
     while (i < gottenNumbers.size() && j < winningNumbers.size()) {
