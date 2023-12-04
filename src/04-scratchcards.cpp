@@ -13,6 +13,16 @@ class Card
     vector<int> gottenNumbers;
 
     public:
+    static vector<Card*> processInput(vector<vector<vector<int>>> input)
+    {
+        vector<Card*> cards;
+
+        for (auto i : input)
+            cards.push_back(new Card(i));
+
+        return cards;
+    }
+
     Card(vector<vector<int>> input) : winningNumbers(input[0]), gottenNumbers(input[1])
     {
         sort(winningNumbers.begin(), winningNumbers.end());
@@ -56,10 +66,5 @@ static int countPoints(vector<Card*> cards)
 
 int Solution_04::part1(vector<vector<vector<int>>> input)
 {
-    vector<Card*> cards;
-
-    for (auto i : input)
-        cards.push_back(new Card(i));
-
-    return countPoints(cards);
+    return countPoints(Card::processInput(input));
 }
