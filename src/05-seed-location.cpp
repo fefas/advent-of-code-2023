@@ -6,6 +6,12 @@ using namespace std;
 
 int Solution_05::part1(vector<int> seeds, vector<vector<vector<int>>> mappings)
 {
-    return seeds[0];
+    int min = seeds[0];
+
+    for (int i = 0; i < seeds.size(); i++) {
+        if (min > seeds[i]) min = seeds[i];
+    }
+
+    return min;
 }
 
