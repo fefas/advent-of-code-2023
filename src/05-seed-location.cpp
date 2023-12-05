@@ -7,14 +7,16 @@ using namespace std;
 int Solution_05::part1(vector<int> seeds, vector<vector<vector<int>>> mappings)
 {
     for (auto mapping : mappings) {
-        for (auto ml : mapping ) {
-            int sourceStart = ml[0];
-            int sourceEnd = sourceStart + ml[2];
-            int destinationStart = ml[1];
+        for (int i = 0; i < seeds.size(); i++) {
+            for (auto ml : mapping ) {
+                int destinationStart = ml[0];
+                int sourceStart = ml[1];
+                int sourceEnd = sourceStart + ml[2];
 
-            for (int i = 0; i < seeds.size(); i++) {
-                if (seeds[i] >= sourceStart && seeds[0] <= sourceEnd)
+                if (sourceStart <= seeds[i] && seeds[i] <= sourceEnd) {
                     seeds[i] += destinationStart - sourceStart;
+                    break;
+                }
             }
         }
     }
@@ -27,4 +29,3 @@ int Solution_05::part1(vector<int> seeds, vector<vector<vector<int>>> mappings)
 
     return min;
 }
-

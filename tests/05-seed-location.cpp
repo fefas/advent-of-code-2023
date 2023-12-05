@@ -18,20 +18,20 @@ namespace {
 
     TEST(SeedLocation, threeSeedsAndWithOneSimpleMapping) {
         ASSERT_EQ(6, solution->part1({ 79, 23, 14 }, {
-            { { 75, 2, 10 } },
+            { { 2, 75, 10 } },
         }));
     }
 
     TEST(SeedLocation, threeSeedsAndWithTwoSimpleMappings) {
         ASSERT_EQ(2, solution->part1({ 79, 23, 14 }, {
-            { { 75, 2, 10 } },
-            { { 22, 1, 10 } },
+            { { 2, 75, 10 } },
+            { { 1, 22, 10 } },
         }));
     }
 
     TEST(SeedLocation, threeSeedsAndMappings) {
         ASSERT_EQ(2, solution->part1({ 79, 23, 14 }, {
-            { { 75, 2, 10 }, { 22, 1, 10 } },
+            { { 2, 75, 10 }, { 1, 22, 10 } },
         }));
     }
 }
