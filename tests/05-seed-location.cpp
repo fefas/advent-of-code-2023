@@ -21,4 +21,11 @@ namespace {
             { { 75, 2, 10 } },
         }));
     }
+
+    TEST(SeedLocation, threeSeedsAndWithTwoSimpleMappings) {
+        ASSERT_EQ(2, solution->part1({ 79, 23, 14 }, {
+            { { 75, 2, 10 } },
+            { { 22, 1, 10 } },
+        }));
+    }
 }
