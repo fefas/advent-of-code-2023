@@ -15,4 +15,10 @@ namespace {
     TEST(SeedLocation, threeSeedsAndWithNoMapping) {
         ASSERT_EQ(14, solution->part1({ 79, 23, 14 }, {}));
     }
+
+    TEST(SeedLocation, threeSeedsAndWithOneSimpleMapping) {
+        ASSERT_EQ(6, solution->part1({ 79, 23, 14 }, {
+            { { 75, 2, 10 } },
+        }));
+    }
 }
