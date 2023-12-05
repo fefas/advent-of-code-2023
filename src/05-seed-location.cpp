@@ -4,14 +4,14 @@
 
 using namespace std;
 
-int Solution_05::part1(vector<int> seeds, vector<vector<vector<int>>> mappings)
+int Solution_05::part1(vector<long> seeds, vector<vector<vector<long>>> mappings)
 {
     for (auto mapping : mappings) {
         for (int i = 0; i < seeds.size(); i++) {
             for (auto ml : mapping ) {
-                int destinationStart = ml[0];
-                int sourceStart = ml[1];
-                int sourceEnd = sourceStart + ml[2];
+                long destinationStart = ml[0];
+                long sourceStart = ml[1];
+                long sourceEnd = sourceStart + ml[2];
 
                 if (sourceStart <= seeds[i] && seeds[i] <= sourceEnd) {
                     seeds[i] += destinationStart - sourceStart;
