@@ -12,4 +12,8 @@ namespace {
     TEST(CamelCards, noHands) {
         ASSERT_EQ(0, solution->part1({}));
     }
+
+    TEST(CamelCards, oneHand) {
+        ASSERT_EQ(1403, solution->part1({ { "AAAAA", 1403 } }));
+    }
 }
