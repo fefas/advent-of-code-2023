@@ -17,7 +17,7 @@ int Solution_07::part1(vector<pair<string,int>> hands)
         for (auto c : a.first) aCount[c]++;
         for (auto c : b.first) bCount[c]++;
 
-        short aPoint = 1, bPoint = 1;
+        short aPoint = 0, bPoint = 0;
 
         for (auto c : aCount) {
             if (c.second == 5) {
@@ -26,6 +26,10 @@ int Solution_07::part1(vector<pair<string,int>> hands)
             }
             if (c.second == 3) {
                 aPoint = (aCount.size() == 2) ? 4 : 3;
+                break;
+            }
+            if (c.second == 2) {
+                aPoint = (aCount.size() == 2) ? 4 : ((aCount.size() == 3) ? 2 : 1);
                 break;
             }
         }
@@ -37,6 +41,10 @@ int Solution_07::part1(vector<pair<string,int>> hands)
             }
             if (c.second == 3) {
                 bPoint = (bCount.size() == 2) ? 4 : 3;
+                break;
+            }
+            if (c.second == 2) {
+                bPoint = (bCount.size() == 2) ? 4 : ((bCount.size() == 3) ? 2 : 1);
                 break;
             }
         }

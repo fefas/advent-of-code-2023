@@ -32,4 +32,15 @@ namespace {
             { "12345", 12 },
         }));
     }
+
+    TEST(CamelCards, unrankedAllHandTypes) {
+        ASSERT_EQ(56, solution->part1({
+            { "AAA11", 2 },
+            { "12AAA", 3 },
+            { "1BBAA", 4 },
+            { "AAAAA", 1 },
+            { "1AA45", 5 },
+            { "12345", 6 },
+        }));
+    }
 }
