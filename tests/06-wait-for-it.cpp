@@ -5,8 +5,7 @@
 namespace {
     Solution_06 *solution = new Solution_06();
 
-    TEST(WaitForIt, zero) {
-        ASSERT_EQ(0, solution->part1());
+    TEST(WaitForIt, oneRaceWithOddTime) {
+        ASSERT_EQ(4, solution->part1(7, 9));
     }
 }
-
