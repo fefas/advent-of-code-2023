@@ -12,7 +12,22 @@ int Solution_07::part1(vector<pair<string,int>> hands)
     int sum = 0;
 
     sort(hands.begin(), hands.end(), [](pair<string,int> a, pair<string, int> b) {
-        map<char, short> aCount, bCount;
+        map<char,short> aCount, bCount;
+        map<char,short> cardStrength = {
+            { 'A', 13 },
+            { 'K', 12 },
+            { 'Q', 11 },
+            { 'J', 10 },
+            { 'T',  9 },
+            { '9',  8 },
+            { '8',  7 },
+            { '7',  6 },
+            { '6',  5 },
+            { '5',  4 },
+            { '4',  3 },
+            { '3',  2 },
+            { '2',  1 },
+        };
 
         for (auto c : a.first) aCount[c]++;
         for (auto c : b.first) bCount[c]++;
@@ -49,7 +64,13 @@ int Solution_07::part1(vector<pair<string,int>> hands)
             }
         }
 
-        return aPoint < bPoint;
+        if (aPoint != bPoint) return aPoint < bPoint;
+
+        for (int i = 0; i < 5; i++) {
+            if (cardStrength[a.first[i]] != cardStrength[b.first[i]]) return cardStrength[a.first[i]] < cardStrength[b.first[i]];
+        }
+
+        return false;
     });
 
     for (int i = 0; i < hands.size(); i++) {

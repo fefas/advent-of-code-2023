@@ -43,4 +43,22 @@ namespace {
             { "12345", 6 },
         }));
     }
+
+    TEST(CamelCards, unrankedHandsWithSameType) {
+        ASSERT_EQ(455, solution->part1({
+            { "77777",  8 },
+            { "KKKKK",  2 },
+            { "88888",  7 },
+            { "99999",  6 },
+            { "QQQQQ",  3 },
+            { "66666",  9 },
+            { "AAAAA",  1 },
+            { "TTTTT",  5 },
+            { "55555", 10 },
+            { "33333", 12 },
+            { "44444", 11 },
+            { "JJJJJ",  4 },
+            { "22222", 13 },
+        }));
+    }
 }
