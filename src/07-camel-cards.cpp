@@ -13,8 +13,8 @@ class Config
     static Config* _singleton;
     bool _isJokerActivated;
     map<char,short> strengthMap = {
-        { 'A', 13 }, { 'K', 12 }, { 'Q', 11 }, { 'J', 10 }, { 'T',  9 },
-        { '9',  8 }, { '8',  7 }, { '7',  6 }, { '6',  5 }, { '5',  4 }, { '4',  3 }, { '3',  2 }, { '2',  1 } };
+        { 'A', 14 }, { 'K', 13 }, { 'Q', 12 }, { 'J', 11 }, { 'T',  10 },
+        { '9',  9 }, { '8',  8 }, { '7',  7 }, { '6',  6 }, { '5',  5 }, { '4',  4 }, { '3',  3 }, { '2',  2 } };
 
     Config() : _isJokerActivated(false)
     {
@@ -68,13 +68,12 @@ class Cards
     int strength = 0;
     const string cards;
 
-    public:
-    Cards(string _c) : cards(_c)
+    int determineType()
     {
         map<char,short> count;
         for (auto c : cards) count[c]++;
 
-        if (Config::isJokerActivated()) {
+        if (Config::isJokerActivated() && count['J'] != 5) {
             char mostFrequent = 'x';
             for (auto c : count)
                 if (c.first != 'J' && c.second > count[mostFrequent])
@@ -82,29 +81,36 @@ class Cards
 
             count[mostFrequent] += count['J'];
             count['J'] = 0;
+
+            count.erase('J');
+            count.erase('x');
         }
 
         for (auto c : count) {
-            if (c.second == 5) { type = FIVE_OF_KIND; break; }
-            if (c.second == 4) { type = FOUR_OF_KIND; break; }
-            if (c.second == 3 && count.size() == 2) { type = FULL_HOUSE; break; }
-            if (c.second == 3 && count.size() == 3) { type = THREE_OF_KIND; break; }
-            if (c.second == 2 && count.size() == 2) { type = FULL_HOUSE; break; }
-            if (c.second == 2 && count.size() == 3) { type = TWO_PAIR; break; }
-            if (c.second == 2 && count.size() == 4) { type = ONE_PAIR; break; }
+            if (c.second == 5) return FIVE_OF_KIND;
+            if (c.second == 4) return FOUR_OF_KIND;
+            if (c.second == 3 && count.size() == 2) return FULL_HOUSE;
+            if (c.second == 2 && count.size() == 2) return FULL_HOUSE;
+            if (c.second == 3 && count.size() == 3) return THREE_OF_KIND;
+            if (c.second == 2 && count.size() == 3) return TWO_PAIR;
+            if (c.second == 2 && count.size() == 4) return ONE_PAIR;
         }
 
-        for (auto c : cards) strength = 13 * strength + Config::determineStrength(c);
+        return HIGH_CARD;
+    }
+
+
+    public:
+    Cards(string _c) : cards(_c)
+    {
+        type = determineType();
+
+        for (auto c : cards) strength = 15 * strength + Config::determineStrength(c);
     }
 
     bool isBetterThan(Cards *that)
     {
         return (type != that->type) ?  type > that->type : strength >= that->strength;
-    }
-
-    string toString()
-    {
-        return cards + " -> " + to_string(type);
     }
 };
 
@@ -121,7 +127,7 @@ class Hand
         bid = hand.second;
     }
 
-    int calcPoints(int rank)
+    long calcPoints(int rank)
     {
         return rank * bid;
     }
@@ -129,11 +135,6 @@ class Hand
     bool isBetterThan(Hand *that)
     {
         return cards->isBetterThan(that->cards);
-    }
-
-    string toString()
-    {
-        return cards->toString();
     }
 };
 
@@ -157,9 +158,8 @@ class Hands
     {
         long sum = 0;
 
-        for (int i = 0; i < hands.size(); i++) {
-            sum += hands[i]->calcPoints(i + 1);
-        }
+        for (int i = 0; i < hands.size(); i++)
+            sum = sum + hands[i]->calcPoints(i + 1);
 
         return sum;
     }

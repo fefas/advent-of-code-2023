@@ -80,7 +80,7 @@ namespace {
     }
 
     TEST(CamelCards, myPuzzle) {
-        ASSERT_EQ(248569531, solution->part1({
+        vector<pair<string,int>> input = {
             { "72772", 82 },
             { "8Q278", 230 },
             { "QQJQQ", 42 },
@@ -1081,6 +1081,9 @@ namespace {
             { "69753", 514 },
             { "7J9AT", 722 },
             { "86866", 534 },
-        }));
+        };
+
+        ASSERT_EQ(248569531, solution->part1(input));
+        ASSERT_EQ(250382098, solution->part2(input));
     }
 }
