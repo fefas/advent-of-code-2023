@@ -8,4 +8,8 @@ namespace {
     TEST(WaitForIt, oneRaceWithOddTime) {
         ASSERT_EQ(4, solution->part1(7, 9));
     }
+
+    TEST(WaitForIt, oneRaceWithEvenTime) {
+        ASSERT_EQ(9, solution->part1(30, 200));
+    }
 }

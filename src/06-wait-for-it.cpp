@@ -7,9 +7,9 @@ using namespace std;
 
 int Solution_06::part1(int raceTime, int recordDistance)
 {
-    int ans = 0;
-    float tBest = raceTime / 2.0;
-    int t = floor(tBest);
+    int ans = (raceTime % 2) ? 2 : 1;
+    int tBest = raceTime / 2;
+    int t = tBest - 1;
     int currDistance = - t * t + raceTime * t;
 
     while (currDistance > recordDistance) {
