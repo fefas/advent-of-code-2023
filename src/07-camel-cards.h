@@ -6,5 +6,5 @@ using namespace std;
 class Solution_07
 {
     public:
-    int part1(vector<pair<string,int>> hands);
+    long part1(vector<pair<string,int>> hands);
 };
