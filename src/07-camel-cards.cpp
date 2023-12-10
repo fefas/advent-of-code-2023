@@ -7,6 +7,52 @@
 
 using namespace std;
 
+class Config
+{
+    private:
+    static Config* _singleton;
+    bool _isJokerActivated;
+    map<char,short> strengthMap = {
+        { 'A', 13 }, { 'K', 12 }, { 'Q', 11 }, { 'J', 10 }, { 'T',  9 },
+        { '9',  8 }, { '8',  7 }, { '7',  6 }, { '6',  5 }, { '5',  4 }, { '4',  3 }, { '3',  2 }, { '2',  1 } };
+
+    Config() : _isJokerActivated(false)
+    {
+    }
+
+    static Config* getInstance()
+    {
+        if (_singleton == NULL) _singleton = new Config();
+
+        return _singleton;
+    }
+
+    public:
+    static short determineStrength(char c)
+    {
+        if (c == 'J' && getInstance()->isJokerActivated()) return 1;
+
+        return getInstance()->strengthMap[c];
+    }
+
+    static bool isJokerActivated()
+    {
+        return getInstance()->_isJokerActivated;
+    }
+
+    static void activateJoker()
+    {
+        getInstance()->_isJokerActivated = true;
+    }
+
+    static void deactivateJoker()
+    {
+        getInstance()->_isJokerActivated = false;
+    }
+};
+
+Config* Config::_singleton = nullptr;
+
 class Cards
 {
     private:
@@ -28,6 +74,16 @@ class Cards
         map<char,short> count;
         for (auto c : cards) count[c]++;
 
+        if (Config::isJokerActivated()) {
+            char mostFrequent = 'x';
+            for (auto c : count)
+                if (c.first != 'J' && c.second > count[mostFrequent])
+                    mostFrequent = c.first;
+
+            count[mostFrequent] += count['J'];
+            count['J'] = 0;
+        }
+
         for (auto c : count) {
             if (c.second == 5) { type = FIVE_OF_KIND; break; }
             if (c.second == 4) { type = FOUR_OF_KIND; break; }
@@ -38,11 +94,7 @@ class Cards
             if (c.second == 2 && count.size() == 4) { type = ONE_PAIR; break; }
         }
 
-        map<char,short> strengthMap = {
-            { 'A', 13 }, { 'K', 12 }, { 'Q', 11 }, { 'J', 10 }, { 'T',  9 },
-            { '9',  8 }, { '8',  7 }, { '7',  6 }, { '6',  5 }, { '5',  4 }, { '4',  3 }, { '3',  2 }, { '2',  1 } };
-
-        for (auto c : cards) strength = 13 * strength + strengthMap[c];
+        for (auto c : cards) strength = 13 * strength + Config::determineStrength(c);
     }
 
     bool isBetterThan(Cards *that)
@@ -85,18 +137,49 @@ class Hand
     }
 };
 
+class Hands
+{
+    private:
+    vector<Hand*> hands;
+
+    public:
+    Hands(vector<pair<string,int>> input)
+    {
+        for (int i = 0; i < input.size(); i++)
+            hands.push_back(new Hand(input[i]));
+
+        sort(hands.begin(), hands.end(), [](Hand *a, Hand *b) {
+            return b->isBetterThan(a);
+        });
+    }
+
+    long calcWinningPoints()
+    {
+        long sum = 0;
+
+        for (int i = 0; i < hands.size(); i++) {
+            sum += hands[i]->calcPoints(i + 1);
+        }
+
+        return sum;
+    }
+};
+
 long Solution_07::part1(vector<pair<string,int>> input)
 {
-    vector<Hand*> hands;
-    for (int i = 0; i < input.size(); i++) {
-        hands.push_back(new Hand(input[i]));
-    }
-    sort(hands.begin(), hands.end(), [](Hand *a, Hand *b) { return b->isBetterThan(a); });
+    Config::deactivateJoker();
 
-    long sum = 0;
-    for (int i = 0; i < hands.size(); i++) {
-        sum += hands[i]->calcPoints(i + 1);
-    }
+    Hands *hands = new Hands(input);
 
-    return sum;
+    return hands->calcWinningPoints();
+};
+
+
+long Solution_07::part2(vector<pair<string,int>> input)
+{
+    Config::activateJoker();
+
+    Hands *hands = new Hands(input);
+
+    return hands->calcWinningPoints();
 };
