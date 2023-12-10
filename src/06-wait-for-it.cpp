@@ -4,23 +4,22 @@
 
 using namespace std;
 
-int Solution_06::part1(map<int, int> input)
+long calcDistance(long raceTime, long holdingTime)
+{
+    return holdingTime * (raceTime - holdingTime);
+}
+
+int Solution_06::solve(map<long, long> input)
 {
     int ans = 1;
 
     for (auto x : input) {
-        int raceTime = x.first;
-        int recordDistance = x.second;
+        long raceTime = x.first;
+        long recordDistance = x.second;
 
-        int count = (raceTime % 2) ? 2 : 1;
-        int t = raceTime / 2 - 1;
-        int currDistance = - t * t + raceTime * t;
-
-        while (currDistance > recordDistance) {
+        long count = 1 + raceTime % 2;
+        for (long t = raceTime / 2 - 1; calcDistance(raceTime, t) > recordDistance; t--)
             count += 2;
-            t--;
-            currDistance = - t * t + raceTime * t;
-        }
 
         ans *= count;
     }
