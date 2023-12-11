@@ -11,7 +11,14 @@ namespace {
 
     TEST(HauntedWasteland, oneStep) {
         ASSERT_EQ(1, solution->part1("L", {
-            { "AAA", { "ZZZ" , "AAA" } }
+            { "AAA", { "ZZZ" , "AAA" } },
+        }));
+    }
+
+    TEST(HauntedWasteland, twoStepGoingOnlyLeft) {
+        ASSERT_EQ(2, solution->part1("L", {
+            { "AAA", { "BBB" , "AAA" } },
+            { "BBB", { "ZZZ" , "AAA" } },
         }));
     }
 }
