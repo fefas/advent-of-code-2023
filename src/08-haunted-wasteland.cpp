@@ -1,4 +1,5 @@
 #include <map>
+#include <numeric>
 #include <string>
 #include <vector>
 
@@ -9,23 +10,18 @@ using namespace std;
 class Navigation
 {
     private:
-    bool ghostMode;
     string instructions;
     map<string,pair<string,string>> network;
 
+    string currNode;
     int currInstruction = 0;
-    vector<string> currNodes = {};
 
     public:
-    Navigation(string _i, map<string,pair<string,string>> _n, bool _g)
+    Navigation(string _i, map<string,pair<string,string>> _n, string _sn)
     {
         instructions = _i;
+        currNode = _sn;
         network = _n;
-        ghostMode = _g;
-
-        if (!ghostMode) currNodes.push_back("AAA");
-        else for (auto node : network)
-            if (node.first[2] == 'A') currNodes.push_back(node.first);
     }
 
     int countSteps()
@@ -33,9 +29,7 @@ class Navigation
         int stepCount = 0;
 
         while (!isEndReached()) {
-            char direction = getNextInstruction();
-            for (int i = 0; i < currNodes.size(); i++) currNodes[i] = getNextNode(currNodes[i], direction);
-
+            currNode = getNextNode(currNode);
             stepCount++;
         }
 
@@ -45,35 +39,37 @@ class Navigation
     private:
     bool isEndReached()
     {
-        if (!ghostMode)
-            return currNodes[0] == "ZZZ";
-        else for (auto node : currNodes) if (node[2] != 'Z')
-            return false;
-
-        return true;
+        return currNode[2] == 'Z';
     }
 
-    char getNextInstruction()
+    string getNextNode(string node)
     {
-        return instructions[(currInstruction++) % instructions.size()];
+        return isNextInstructionLeft() ? network[node].first : network[node].second;
     }
 
-    string getNextNode(string node, char direction)
+    char isNextInstructionLeft()
     {
-        return direction == 'L' ? network[node].first : network[node].second;
+        return 'L' == instructions[(currInstruction++) % instructions.size()];
     }
 };
 
 int Solution_08::part1(string instructions, map<string,pair<string,string>> network)
 {
-    Navigation *nav = new Navigation(instructions, network, false);
+    Navigation *nav = new Navigation(instructions, network, "AAA");
 
     return nav->countSteps();
 };
 
-int Solution_08::part2(string instructions, map<string,pair<string,string>> network)
+long Solution_08::part2(string instructions, map<string,pair<string,string>> network)
 {
-    Navigation *nav = new Navigation(instructions, network, true);
+    long ans = 1;
 
-    return nav->countSteps();
+    for (auto n : network) {
+        if (n.first[2] != 'A') continue;
+
+        Navigation *nav = new Navigation(instructions, network, n.first);
+        ans = lcm(ans, nav->countSteps());
+    }
+
+    return ans;
 };

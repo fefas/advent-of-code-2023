@@ -834,5 +834,6 @@ namespace {
         };
 
         ASSERT_EQ(18727, solution->part1(instructions, network));
+        ASSERT_EQ(18024643846273, solution->part2(instructions, network));
     }
 }
