@@ -13,7 +13,8 @@ int Solution_08::part1(string instructions, map<string,pair<string,string>> netw
     string currNode = "AAA";
 
     while (currNode != "ZZZ") {
-        currNode = network[currNode].first;
+        char direction = instructions[(instructionI++) % instructions.size()];
+        currNode = direction == 'L' ? network[currNode].first : network[currNode].second;
         stepCount++;
     }
 

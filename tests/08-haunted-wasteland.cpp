@@ -21,4 +21,11 @@ namespace {
             { "BBB", { "ZZZ" , "AAA" } },
         }));
     }
+
+    TEST(HauntedWasteland, stepsGoingRightAndLeft) {
+        ASSERT_EQ(4, solution->part1("RL", {
+            { "AAA", { "BBB" , "AAA" } },
+            { "BBB", { "ZZZ" , "BBB" } },
+        }));
+    }
 }
