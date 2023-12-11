@@ -13,60 +13,45 @@ class Navigation
     string instructions;
     map<string,pair<string,string>> network;
 
-    string currNode;
-    int currInstruction = 0;
-
     public:
-    Navigation(string _i, map<string,pair<string,string>> _n, string _sn)
+    Navigation(string _i, map<string,pair<string,string>> _n)
     {
         instructions = _i;
-        currNode = _sn;
         network = _n;
     }
 
-    int countSteps()
+    int countStepsFrom(string node, int currInstruction = 0)
     {
-        if (isEndReached()) return 0;
-
-        currNode = getNextNode(currNode);
-
-        return 1 + countSteps();
+        return node[2] == 'Z' ? 0 : 1 + countStepsFrom(getNextNode(node, currInstruction), currInstruction + 1);
     }
 
     private:
-    bool isEndReached()
+    string getNextNode(string node, int currInstruction)
     {
-        return currNode[2] == 'Z';
+        return isNextInstructionLeft(currInstruction) ? network[node].first : network[node].second;
     }
 
-    string getNextNode(string node)
+    char isNextInstructionLeft(int currInstruction)
     {
-        return isNextInstructionLeft() ? network[node].first : network[node].second;
-    }
-
-    char isNextInstructionLeft()
-    {
-        return 'L' == instructions[(currInstruction++) % instructions.size()];
+        return 'L' == instructions[currInstruction % instructions.size()];
     }
 };
 
 int Solution_08::part1(string instructions, map<string,pair<string,string>> network)
 {
-    Navigation *nav = new Navigation(instructions, network, "AAA");
+    Navigation *nav = new Navigation(instructions, network);
 
-    return nav->countSteps();
+    return nav->countStepsFrom("AAA");
 };
 
 long Solution_08::part2(string instructions, map<string,pair<string,string>> network)
 {
+    Navigation *nav = new Navigation(instructions, network);
+
     long ans = 1;
-
-    for (auto n : network) {
-        if (n.first[2] != 'A') continue;
-
-        Navigation *nav = new Navigation(instructions, network, n.first);
-        ans = lcm(ans, nav->countSteps());
-    }
+    for (auto n : network)
+        if (n.first[2] == 'A')
+            ans = lcm(ans, nav->countStepsFrom(n.first));
 
     return ans;
 };
