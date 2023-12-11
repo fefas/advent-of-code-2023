@@ -28,4 +28,24 @@ namespace {
             { "BBB", { "ZZZ" , "BBB" } },
         }));
     }
+
+    TEST(HauntedWasteland, sampleInput1) {
+        ASSERT_EQ(2, solution->part1("RL", {
+            { "AAA", { "BBB", "CCC" } },
+            { "BBB", { "DDD", "EEE" } },
+            { "CCC", { "ZZZ", "GGG" } },
+            { "DDD", { "DDD", "DDD" } },
+            { "EEE", { "EEE", "EEE" } },
+            { "GGG", { "GGG", "GGG" } },
+            { "ZZZ", { "ZZZ", "ZZZ" } },
+        }));
+    }
+
+    TEST(HauntedWasteland, sampleInput2) {
+        ASSERT_EQ(6, solution->part1("LLR", {
+            { "AAA", { "BBB", "BBB" } },
+            { "BBB", { "AAA", "ZZZ" } },
+            { "ZZZ", { "ZZZ", "ZZZ" } },
+        }));
+    }
 }
