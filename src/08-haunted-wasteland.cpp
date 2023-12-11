@@ -26,14 +26,11 @@ class Navigation
 
     int countSteps()
     {
-        int stepCount = 0;
+        if (isEndReached()) return 0;
 
-        while (!isEndReached()) {
-            currNode = getNextNode(currNode);
-            stepCount++;
-        }
+        currNode = getNextNode(currNode);
 
-        return stepCount;
+        return 1 + countSteps();
     }
 
     private:
