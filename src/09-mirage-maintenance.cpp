@@ -1,8 +1,29 @@
 #include <vector>
 
+#include <iostream>
+
 #include "09-mirage-maintenance.h"
 
-int Solution_09::part1(vector<int>)
+using namespace std;
+
+int Solution_09::part1(vector<int> input)
 {
-    return 18;
+    vector<vector<int>> prediction = { input };
+
+    int levelSum, level = 0;
+    do {
+        level++;
+        levelSum = 0;
+        prediction.push_back({});
+
+        for (int col = 1; col < prediction[level-1].size(); col++) {
+            prediction[level].push_back(prediction[level-1][col] - prediction[level-1][col-1]);
+            levelSum += prediction[level].back();
+        }
+    } while (levelSum);
+
+    prediction.back().push_back(0);
+    while (--level >= 0) prediction[level].push_back(prediction[level].back() + prediction[level+1].back());
+
+    return prediction[0].back();
 };

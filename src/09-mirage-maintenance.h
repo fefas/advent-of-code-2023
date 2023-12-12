@@ -5,5 +5,5 @@ using namespace std;
 class Solution_09
 {
     public:
-    int part1(vector<int>);
+    int part1(vector<int> input);
 };
