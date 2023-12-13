@@ -6,24 +6,25 @@
 
 using namespace std;
 
-int Solution_09::part1(vector<vector<int>> input)
+long Solution_09::part1(vector<vector<long>> input)
 {
     int ans = 0;
 
     for (auto i : input) {
-        vector<vector<int>> prediction = { i };
+        vector<vector<long>> prediction = { i };
 
-        int levelSum, level = 0;
+        bool allZero;
+        int level = 0;
         do {
             level++;
-            levelSum = 0;
+            allZero = true;
             prediction.push_back({});
 
             for (int col = 1; col < prediction[level-1].size(); col++) {
                 prediction[level].push_back(prediction[level-1][col] - prediction[level-1][col-1]);
-                levelSum += prediction[level].back();
+                allZero = allZero && prediction[level].back() == 0;
             }
-        } while (levelSum);
+        } while (!allZero);
 
         prediction.back().push_back(0);
         while (--level >= 0) prediction[level].push_back(prediction[level].back() + prediction[level+1].back());
