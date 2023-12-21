@@ -27,4 +27,14 @@ namespace {
             ".....",
         }));
     }
+
+    TEST(PipeMaze, thirdSample) {
+        ASSERT_EQ(6, solution->part1({
+            ".......",
+            ".S-7...",
+            ".|.L-7.",
+            ".L---J.",
+            ".......",
+        }));
+    }
 }
