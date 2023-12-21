@@ -35,7 +35,6 @@ class PipePath
 
     bool endReached()
     {
-//        cout << " !! end reached? " << (m[y][x] == 'S') << " -- " << m[y][x] << endl;
         return m[y][x] == 'S';
     }
 
@@ -48,25 +47,16 @@ class PipePath
     {
         int currX = x, currY = y;
 
-//        cout << "walk: " << m[y][x] << endl;
-
         if (isNextPipe(x - 1, y)) x--;
         else if (isNextPipe(x + 1, y)) x++;
         else if (isNextPipe(x, y - 1)) y--;
         else if (isNextPipe(x, y + 1)) y++;
         else throw "could not walk";
 
-//        cout << endl;
-
         stepCount++;
         prevX = currX;
         prevY = currY;
     }
-//
-//    void print()
-//    {
-//        cout << x << ',' << y << ": " << m[y][x] << " >>> " << stepCount << endl;
-//    }
 
     private:
     bool isNextPipe(int newX, int newY)
@@ -76,8 +66,6 @@ class PipePath
 
         char currPipe = m[y][x];
         char nextPipe = m[newY][newX];
-
-//        cout << " > try: " << nextPipe << "(x:" << x << "->" << newX << ") (y:" << y << "->" << newY << ") --> ";
 
         vector<char> allowedNextPipes = {};
         if (newX > x && (currPipe == 'S' || currPipe == '-' || currPipe == 'L' || currPipe == 'F')) // moving right
