@@ -10,7 +10,7 @@ using namespace std;
 class PipePath
 {
     private:
-    const vector<string> m;
+    vector<string> m;
     const int xLen, yLen;
     int x, y;
     int prevX, prevY;
@@ -28,19 +28,26 @@ class PipePath
                 if (m[y][x] == 'S') return;
     }
 
-    bool operator!=(const PipePath& that)
+    void print()
     {
-        return x != that.x || y != that.y;
+        for (auto l : m)
+            cout << l << endl;
     }
 
-    bool endReached()
+    int countStepsToFarthestPoint()
     {
-        return m[y][x] == 'S';
+        markPath();
+        print();
+
+        return stepCount / 2;
     }
 
-    int length()
+    private:
+    void markPath()
     {
-        return stepCount;
+        do {
+            walk();
+        } while (m[y][x] != 'S');
     }
 
     void walk()
@@ -53,12 +60,9 @@ class PipePath
         else if (isNextPipe(x, y + 1)) y++;
         else throw "could not walk";
 
-        stepCount++;
-        prevX = currX;
-        prevY = currY;
+        makeStep(currX, currY);
     }
 
-    private:
     bool isNextPipe(int newX, int newY)
     {
         if (newX < 0 || newY < 0 || newX >= xLen || newY >= yLen) return false;
@@ -82,15 +86,22 @@ class PipePath
 
         return false;
     }
+
+    void makeStep(int x, int y)
+    {
+        stepCount++;
+        prevX = x;
+        prevY = y;
+
+        if (m[prevY][prevX] == 'S') return;
+
+        m[prevY][prevX] = 'x';
+    }
 };
 
 int Solution_10::part1(vector<string> input)
 {
     PipePath path(input);
 
-    do {
-        path.walk();
-    } while (!path.endReached());
-
-    return path.length() / 2;
+    return path.countStepsToFarthestPoint();
 };
