@@ -10,6 +10,6 @@ WORKDIR /home/aoc2023
 
 COPY ./ ./
 
-RUN g++ -o main main.cpp tests/*.cpp src/*.cpp -lgtest
+RUN g++ -std=c++17 -o main main.cpp tests/*.cpp src/*.cpp -lgtest
 
 ENTRYPOINT ["./main"]
