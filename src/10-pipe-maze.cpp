@@ -62,11 +62,11 @@ class PipePath
         prevX = currX;
         prevY = currY;
     }
-
-    void print()
-    {
-        cout << x << ',' << y << ": " << m[y][x] << " >>> " << stepCount << endl;
-    }
+//
+//    void print()
+//    {
+//        cout << x << ',' << y << ": " << m[y][x] << " >>> " << stepCount << endl;
+//    }
 
     private:
     bool isNextPipe(int newX, int newY)
@@ -89,11 +89,8 @@ class PipePath
         else if (newY < y && (currPipe == 'S' || currPipe == '|' || currPipe == 'J' || currPipe == 'L')) // moving up
             allowedNextPipes = { 'S', '|', 'F', '7' };
 
-        for (auto p : allowedNextPipes) {
-//            cout << p << ',';
+        for (auto p : allowedNextPipes)
             if (p == nextPipe) return true;
-        }
-//        cout << endl;
 
         return false;
     }
@@ -103,10 +100,8 @@ int Solution_10::part1(vector<string> input)
 {
     PipePath path(input);
 
-    path.print();
     do {
         path.walk();
-        path.print();
     } while (!path.endReached());
 
     return path.length() / 2;
