@@ -10,7 +10,7 @@ using namespace std;
 class PipePath
 {
     private:
-    vector<string> m;
+    const vector<string> m;
     const int xLen, yLen;
     int x, y;
     int prevX, prevY;
@@ -58,7 +58,8 @@ class PipePath
         int count = 0;
         for (int dy = 0; dy < yLen; dy++)
             for (int dx = 0; dx < xLen; dx++)
-                if (m[dy][dx] != 'x' && m[dy][dx] != 'S' && m[dy][dx] != 'O') { count++; m[dy][dx] = 'I';}
+                if (m[dy][dx] != 'x' && m[dy][dx] != 'S' && m[dy][dx] != 'O')
+                    count++;
 
 //        print();
 
@@ -78,7 +79,7 @@ class PipePath
         if (x < 0 || y < 0 || x >= xLen || y >= yLen) return;
         if (m[y][x] == 'x' || m[y][x] == 'S' || m[y][x] == 'O') return;
 
-        m[y][x] = 'O';
+//        m[y][x] = 'O';
 //        print();
 //        cout << endl;
         identifyOutsideTiles(x - 1, y);
@@ -89,7 +90,7 @@ class PipePath
 
     void walk()
     {
-        int currX = x, currY = y;
+        const int currX = x, currY = y;
 
         if (isNextPipe(x - 1, y)) x--;
         else if (isNextPipe(x + 1, y)) x++;
@@ -100,13 +101,13 @@ class PipePath
         makeStep(currX, currY);
     }
 
-    bool isNextPipe(int newX, int newY)
+    bool isNextPipe(const int newX, const int newY)
     {
         if (newX < 0 || newY < 0 || newX >= xLen || newY >= yLen) return false;
         if (newX == prevX && newY == prevY) return false;
 
-        char currPipe = m[y][x];
-        char nextPipe = m[newY][newX];
+        const char currPipe = m[y][x];
+        const char nextPipe = m[newY][newX];
 
         vector<char> allowedNextPipes = {};
         if (newX > x && (currPipe == 'S' || currPipe == '-' || currPipe == 'L' || currPipe == 'F')) // moving right
@@ -124,7 +125,7 @@ class PipePath
         return false;
     }
 
-    void makeStep(int x, int y)
+    void makeStep(const int x, const int y)
     {
         stepCount++;
         prevX = x;
@@ -132,7 +133,7 @@ class PipePath
 
         if (m[prevY][prevX] == 'S') return;
 
-        m[prevY][prevX] = 'x';
+//        m[prevY][prevX] = 'x';
     }
 };
 
