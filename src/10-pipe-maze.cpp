@@ -37,9 +37,32 @@ class PipePath
     int countStepsToFarthestPoint()
     {
         markPath();
-        print();
+//        print();
 
         return stepCount / 2;
+    }
+
+    int countTilesInEnclosedLoop()
+    {
+        markPath();
+
+        for (int dx = 0; dx < xLen; dx++) {
+            identifyOutsideTiles(dx, 0);
+            identifyOutsideTiles(dx, yLen - 1);
+        }
+        for (int dy = 0; dy < yLen; dy++) {
+            identifyOutsideTiles(0, dy);
+            identifyOutsideTiles(xLen - 1, dy);
+        }
+
+        int count = 0;
+        for (int dy = 0; dy < yLen; dy++)
+            for (int dx = 0; dx < xLen; dx++)
+                if (m[dy][dx] != 'x' && m[dy][dx] != 'S' && m[dy][dx] != 'O') { count++; m[dy][dx] = 'I';}
+
+//        print();
+
+        return count;
     }
 
     private:
@@ -48,6 +71,20 @@ class PipePath
         do {
             walk();
         } while (m[y][x] != 'S');
+    }
+
+    void identifyOutsideTiles(int x, int y)
+    {
+        if (x < 0 || y < 0 || x >= xLen || y >= yLen) return;
+        if (m[y][x] == 'x' || m[y][x] == 'S' || m[y][x] == 'O') return;
+
+        m[y][x] = 'O';
+//        print();
+//        cout << endl;
+        identifyOutsideTiles(x - 1, y);
+        identifyOutsideTiles(x + 1, y);
+        identifyOutsideTiles(x, y - 1);
+        identifyOutsideTiles(x, y + 1);
     }
 
     void walk()
@@ -104,4 +141,11 @@ int Solution_10::part1(vector<string> input)
     PipePath path(input);
 
     return path.countStepsToFarthestPoint();
+};
+
+int Solution_10::part2(vector<string> input)
+{
+    PipePath path(input);
+
+    return path.countTilesInEnclosedLoop();
 };
