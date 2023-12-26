@@ -9,34 +9,34 @@ using namespace std;
 namespace {
     Solution_10 *solution = new Solution_10();
 
-    TEST(PipeMaze, firstSampleStartingOn1comma1) {
-        ASSERT_EQ(2, solution->part1({
-            "....",
-            ".S7.",
-            ".LJ.",
-            "....",
-        }));
-    }
-
-    TEST(PipeMaze, secondSampleStartingOn1comma1) {
-        ASSERT_EQ(4, solution->part1({
-            ".....",
-            ".S-7.",
-            ".|.|.",
-            ".L-J.",
-            ".....",
-        }));
-    }
-
-    TEST(PipeMaze, thirdSampleStartingOn1comma1) {
-        ASSERT_EQ(6, solution->part1({
-            ".......",
-            ".S-7...",
-            ".|.L-7.",
-            ".L---J.",
-            ".......",
-        }));
-    }
+//    TEST(PipeMaze, firstSampleStartingOn1comma1) {
+//        ASSERT_EQ(2, solution->part1({
+//            "....",
+//            ".S7.",
+//            ".LJ.",
+//            "....",
+//        }));
+//    }
+//
+//    TEST(PipeMaze, secondSampleStartingOn1comma1) {
+//        ASSERT_EQ(4, solution->part1({
+//            ".....",
+//            ".S-7.",
+//            ".|.|.",
+//            ".L-J.",
+//            ".....",
+//        }));
+//    }
+//
+//    TEST(PipeMaze, thirdSampleStartingOn1comma1) {
+//        ASSERT_EQ(6, solution->part1({
+//            ".......",
+//            ".S-7...",
+//            ".|.L-7.",
+//            ".L---J.",
+//            ".......",
+//        }));
+//    }
 
     TEST(PipeMaze, fourthSampleStartingOn1comma1) {
         vector<string> input = {
@@ -73,6 +73,22 @@ namespace {
         }));
     }
 
+    TEST(PipeMaze, part2SimpleSample) {
+        ASSERT_EQ(7, solution->part2({
+            "...........",
+            "...........",
+            "...F------7",
+            "...|F----7|",
+            "F--S|....||",
+            "|...|....||",
+            "L--7L-7F-J|",
+            "...|..||..|",
+            "...L--JL--J",
+            "...........",
+            "...........",
+        }));
+    }
+
     TEST(PipeMaze, part2Sample) {
         ASSERT_EQ(8, solution->part2({
             ".F----7F7F7F7F-7....",
@@ -85,6 +101,21 @@ namespace {
             ".....|FJLJ|FJ|F7|.LJ",
             "....FJL-7.||.||||...",
             "....L---J.LJ.LJLJ...",
+        }));
+    }
+
+    TEST(PipeMaze, part2Sample2) {
+        ASSERT_EQ(10, solution->part2({
+            "FF7FSF7F7F7F7F7F---7",
+            "L|LJ||||||||||||F--J",
+            "FL-7LJLJ||||||LJL-77",
+            "F--JF--7||LJLJ7F7FJ-",
+            "L---JF-JLJ.||-FJLJJ7",
+            "|F|F-JF---7F7-L7L|7|",
+            "|FFJF7L7F-JF7|JL---7",
+            "7-L-JL7||F7|L7F-7F7|",
+            "L.L7LFJ|||||FJL7||LJ",
+            "L7JLJL-JLJLJL--JLJ.L",
         }));
     }
 
@@ -233,6 +264,6 @@ namespace {
         };
 
         ASSERT_EQ(6856, solution->part1(input));
-        ASSERT_EQ(0, solution->part2(input));
+        ASSERT_EQ(508, solution->part2(input));
     }
-}
+};

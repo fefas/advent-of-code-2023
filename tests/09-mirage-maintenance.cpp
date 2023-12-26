@@ -243,4 +243,4 @@ namespace {
         ASSERT_EQ(1696140818, solution->part1(input));
         ASSERT_EQ(1152, solution->part2(input));
     }
-}
+};

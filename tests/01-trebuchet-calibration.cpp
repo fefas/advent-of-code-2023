@@ -1083,5 +1083,4 @@ namespace {
 
         ASSERT_EQ(54875, solution->sumCalibrations(input));
     }
-}
-
+};
