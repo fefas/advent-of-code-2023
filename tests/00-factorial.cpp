@@ -20,5 +20,4 @@ namespace {
     TEST(Factorial, three) {
         ASSERT_EQ(6, solution->fat(3));
     }
-}
-
+};

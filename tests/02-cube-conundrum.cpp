@@ -188,4 +188,4 @@ namespace {
         ASSERT_EQ(2164, solution->part1(new NumberOfCubes(14, 12, 13), games));
         ASSERT_EQ(69929, solution->part2(games));
     }
-}
+};
